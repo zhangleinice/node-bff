@@ -1,0 +1,9 @@
+{
+  "name": "buf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "protocol-buffers": "^4.2.0"
+  }
+}
