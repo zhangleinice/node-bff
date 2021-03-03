@@ -20,10 +20,15 @@ message Article {
     required string article_title = 3;
 }
 
+// 返回包
 message ColumnResponse {
+    // Column，栏目列表
     required Column column = 1;
     repeated Column recommendColumns = 2;
 }
+
+// 请求包
 message ColumnRequest {
+    // columnid
     required int32 columnid = 1;
 }

@@ -14,6 +14,7 @@ app.use(async (ctx) => {
     ctx.body = "invalid columnid";
     return;
   }
+  console.log("ctx.query", ctx.query);
 
   const result = await new Promise((resolve, reject) => {
     rpcClient.write(
@@ -27,8 +28,10 @@ app.use(async (ctx) => {
   });
 
   ctx.status = 200;
-
+  //   console.log("result", result);
   ctx.body = detailTemplate(result);
 });
+
+app.listen(3002);
 
 module.exports = app;
