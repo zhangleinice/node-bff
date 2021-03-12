@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "graphql": "^15.5.0",
     "protocol-buffers": "^4.2.0"
   }
 }
