@@ -1,27 +1,30 @@
-const fs = require('fs');
-const vm = require('vm');
+/**
+ *  实现一个es6 字符串模板
+ */
+
+const fs = require("fs");
+const vm = require("vm");
 
 const templateCache = {};
 
 const templateContext = vm.createContext({
-    include: function (name, data) {
-        const template = templateCache[name] || createTemplate(name)
-        return template(data);
-    }
+  include: function (name, data) {
+    const template = templateCache[name] || createTemplate(name);
+    return template(data);
+  },
 });
 
 function createTemplate(templatePath) {
-
-    templateCache[templatePath] = vm.runInContext(
-        `(function (data) {
+  templateCache[templatePath] = vm.runInContext(
+    `(function (data) {
             with (data) {
-                return \`${fs.readFileSync(templatePath, 'utf-8')}\`
+                return \`${fs.readFileSync(templatePath, "utf-8")}\`
             }
         })`,
-        templateContext
-    );
+    templateContext
+  );
 
-    return templateCache[templatePath]
+  return templateCache[templatePath];
 }
 
-module.exports = createTemplate
+module.exports = createTemplate;

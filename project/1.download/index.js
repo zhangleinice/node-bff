@@ -15,12 +15,24 @@ const app = new koa();
 
 app.use(static(__dirname + "/source/"));
 
+/**
+ * 1.根据性能监控结果优化，避免每次都重新读取
+ * 2.提前把文件系统中的内容读取到内存中，中间件里是从内存中取得模板内容
+ * 从硬盘文件中取和从内存中取，肯定是内存更快
+ * 3.第二个参数把buffer 转成 utf-8 字符串，不转更快
+ */
+const buffer = fs.readFileSync(__dirname + "/source/index.html");
+
+// 内存泄漏
+// const arr = [];
+
 app.use(
   mount("/", async (ctx) => {
-    ctx.body = fs.readFileSync(__dirname + "/source/index.html", "utf-8");
+    ctx.status = 200;
+    ctx.type = "html";
+    ctx.body = buffer;
+    // arr.push(buffer);
   })
 );
-
-app.listen(4000);
 
 module.exports = app;

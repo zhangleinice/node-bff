@@ -32,6 +32,4 @@ app.use(async (ctx) => {
   ctx.body = detailTemplate(result);
 });
 
-app.listen(3002);
-
 module.exports = app;
